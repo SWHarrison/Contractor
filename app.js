@@ -1,4 +1,6 @@
 const express = require('express')
+const methodOverride = require('method-override')
+
 const app = express()
 
 const mongoose = require('mongoose');
@@ -7,10 +9,13 @@ mongoose.connect('mongodb://localhost/rotten-potatoes', { useMongoClient: true }
 const Review = mongoose.model('Review', {
   title: String,
   description: String,
-  movieTitle: String
+  movieTitle: String,
+  rating: Number
 });
 
 const bodyParser = require('body-parser');
+
+app.use(methodOverride('_method'))
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -53,6 +58,25 @@ app.post('/reviews', (req, res) => {
     res.redirect(`/reviews/${review._id}`) // Redirect to reviews/:id
   }).catch((err) => {
     console.log(err.message)
+  })
+})
+
+// UPDATE
+app.put('/reviews/:id', (req, res) => {
+  Review.findByIdAndUpdate(req.params.id, req.body)
+    .then(review => {
+      res.redirect(`/reviews/${review._id}`)
+    })
+    .catch(err => {
+      console.log(err.message)
+    })
+})
+
+// EDIT
+app.get('/reviews/:id/edit', function (req, res) {
+    console.log('This is the request body' + req.body)
+  Review.findById(req.params.id, function(err, review) {
+    res.render('reviews-edit', {review: review});
   })
 })
 
