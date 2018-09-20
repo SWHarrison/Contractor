@@ -1,0 +1,16 @@
+// comments.js
+
+const Comment = require('../models/comment')
+const Review = require('../models/review.js')
+
+module.exports = function (app) {
+
+  // CREATE Comment
+  app.post('/reviews/comments', (req, res) => {
+    Comment.create(req.body).then(comment => {
+      res.redirect(`/reviews/${comment.reviewId}`);
+    }).catch((err) => {
+      console.log(err.message);
+    });
+  });
+}

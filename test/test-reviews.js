@@ -10,7 +10,7 @@ const sampleReview =     {
     "title": "Super Sweet Review",
     "movie-title": "La La Land",
     "description": "A great review of a lovely movie.",
-    "rating": "4"
+    "rating": "4/5"
 }
 
 chai.use(chaiHttp);
@@ -19,6 +19,7 @@ chai.use(chaiHttp);
 describe('Reviews', ()  => {
 
     after(() => {
+        console.log(reviews)
         Review.deleteMany({title: 'Super Sweet Review'}).exec((err, reviews) => {
             console.log(reviews)
             reviews.remove();
