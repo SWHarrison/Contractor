@@ -1,0 +1,52 @@
+<!-- views/partials/donation-form.handlebars -->
+
+<form action="/clients/donations" method="post">
+  <input type="hidden" value="{{client._id}}" name="clientId">
+  <fieldset>
+    <legend>Add a Donation</legend>
+    <!-- TITLE -->
+    <div class="form-group">
+      <label for="donation-title">Organization Name</label><br>
+      <input class="form-control"
+        id="donation-title"
+        type="text"
+        name="title"
+        placeholder="Name"/>
+    </div>
+
+    <!-- Amount -->
+    <div class="form-group">
+      <label for="donation-title">Amount</label><br>
+      <input class="form-control"
+        id="donation-amount"
+        type="text"
+        name="amount"
+        placeholder="Amount"/>
+    </div>
+
+    <!-- Date -->
+    <div class="form-group">
+      <label for="donation-title">Date</label><br>
+      <input class="form-control"
+        id="donation-date"
+        type="text"
+        name="date"
+        placeholder="Date"/>
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div class="form-group">
+      <label for="donation-content">Description</label><br>
+      <textarea class="form-control"
+      id="donation-content"
+      name="content"
+      rows="10"
+      placeholder="Your donation..."/></textarea>
+    </div>
+  </fieldset>
+
+  <!-- BUTTON -->
+  <div class="form-group">
+    <button class="btn btn-primary" type="submit">Save Donation</button>
+  </div>
+</form>

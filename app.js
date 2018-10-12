@@ -1,13 +1,14 @@
 var mongoose = require('mongoose');
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/rotten-potatoes');
+//mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/charity_contractor');
+mongoose.connect('mongodb://localhost/charity_contractor');
 
 const express = require('express')
 const methodOverride = require('method-override')
 
 const app = express()
 
-const review = require('./controllers/reviews');
-const comment = require('./controllers/comments')
+const client = require('./controllers/clients');
+const donation = require('./controllers/donations')
 
 const bodyParser = require('body-parser');
 
@@ -22,8 +23,8 @@ app.set('view engine', 'handlebars');
 
 module.exports = app
 
-review(app)
-comment(app)
+client(app)
+donation(app)
 
 app.listen(process.env.PORT || '3000', () => {
     console.log(`App listening on port 3000!`)

@@ -1,0 +1,14 @@
+<!-- views/clients-edit.handlebars -->
+
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <form method="POST" action="/clients/{{client._id}}?_method=PUT">
+      {{> clients-form}}
+      <!-- BUTTON -->
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">Save Client</button>
+        <input type="button" onclick="location.href='/clients/{{client._id}}';" value="Cancel Changes" />
+      </div>
+    </form>
+  </div>
+</div>

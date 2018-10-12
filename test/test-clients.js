@@ -1,33 +1,29 @@
-// test-reviews.js
+// test-clients.js
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const app = require('../app');
 const should = chai.should();
-const Review = require('../models/review');
+const Client = require('../models/client');
 
-const sampleReview =     {
-    "title": "Super Sweet Review",
-    "movie-title": "La La Land",
-    "description": "A great review of a lovely movie.",
-    "rating": "4/5"
+const sampleClient =     {
+    "title": "Super Sweet Client",
+    "description": "A great client with a lovely goal.",
 }
 
 chai.use(chaiHttp);
 
-// tell mocha you want to test Reviews (this string is taco)
-describe('Reviews', ()  => {
+// tell mocha you want to test Clients (this string is taco)
+describe('Clients', ()  => {
 
     after(() => {
-        console.log(reviews)
-        Review.deleteMany({title: 'Super Sweet Review'}).exec((err, reviews) => {
-            console.log(reviews)
-            reviews.remove();
+        Client.deleteMany({title: 'Super Sweet Client'}).exec((err, clients) => {
+            clients.remove();
         })
     });
 
   // make taco name for the test
-  it('should index ALL reviews on / GET', (done) => {
+  it('should index ALL clients on / GET', (done) => {
     // use chai-http to make a request to your server
     chai.request(app)
         // send a GET request to root route
@@ -44,9 +40,9 @@ describe('Reviews', ()  => {
   });
 
   // TEST NEW
-  it('should display new form on /reviews/new GET', (done) => {
+  it('should display new form on /clients/new GET', (done) => {
     chai.request(app)
-      .get(`/reviews/new`)
+      .get(`/clients/new`)
         .end((err, res) => {
           res.should.have.status(200);
           res.should.be.html
@@ -55,11 +51,11 @@ describe('Reviews', ()  => {
   });
 
   // TEST EDIT
-  it('should edit a SINGLE review on /reviews/<id>/edit GET', (done) => {
-      var review = new Review(sampleReview);
-      review.save((err, data) => {
+  it('should edit a SINGLE client on /clients/<id>/edit GET', (done) => {
+      var client = new Client(sampleClient);
+      client.save((err, data) => {
           chai.request(app)
-          .get(`/reviews/${data._id}/edit`)
+          .get(`/clients/${data._id}/edit`)
           .end((err, res) => {
               res.should.have.status(200);
               res.should.be.html
@@ -69,10 +65,10 @@ describe('Reviews', ()  => {
   });
 
   // TEST CREATE
- it('should create a SINGLE review on /reviews POST', (done) => {
+ it('should create a SINGLE client on /clients POST', (done) => {
    chai.request(app)
-       .post('/reviews')
-       .send(sampleReview)
+       .post('/clients')
+       .send(sampleClient)
        .end((err, res) => {
          res.should.have.status(200);
          res.should.be.html
@@ -81,11 +77,11 @@ describe('Reviews', ()  => {
  });
 
  // TEST SHOW
- it('should show a SINGLE review on /reviews/<id> GET', (done) => {
-   var review = new Review(sampleReview);
-   review.save((err, data) => {
+ it('should show a SINGLE client on /clients/<id> GET', (done) => {
+   var client = new Client(sampleClient);
+   client.save((err, data) => {
      chai.request(app)
-       .get(`/reviews/${data._id}`)
+       .get(`/clients/${data._id}`)
        .end((err, res) => {
          res.should.have.status(200);
          res.should.be.html
@@ -95,11 +91,11 @@ describe('Reviews', ()  => {
  });
 
  // TEST DELETE
- it('should delete a SINGLE review on /reviews/<id> DELETE', (done) => {
-   var review = new Review(sampleReview);
-   review.save((err, data)  => {
+ it('should delete a SINGLE client on /clients/<id> DELETE', (done) => {
+   var client = new Client(sampleClient);
+   client.save((err, data)  => {
     chai.request(app)
-     .delete(`/reviews/${data._id}?_method=DELETE`)
+     .delete(`/clients/${data._id}?_method=DELETE`)
      .end((err, res) => {
        res.should.have.status(200);
        res.should.be.html

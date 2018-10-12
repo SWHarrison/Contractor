@@ -1,0 +1,17 @@
+<!-- views/clients-index.handlebars -->
+
+<h1>Clients</h1>
+
+<a href="/clients/new">New Client</a>
+
+<h1>Clients</h1>
+
+<div class="row">
+  {{#each clients}}
+    <div class="col-sm-3">
+      <h2><a href="/clients/{{this._id}}">{{this.title}}</a></h2>
+      <small>{{this.movieTitle}}</small>
+      <small>{{this.rating}}</small>
+    </div>
+  {{/each}}
+</div>

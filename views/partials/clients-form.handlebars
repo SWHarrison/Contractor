@@ -1,0 +1,19 @@
+<!-- views/partials/clients-form.handlebars -->
+<!--<a href="/clients/{{client._id}}">Cancel Changes</a>-->
+
+
+<fieldset>
+  <legend>Edit Client</legend>
+  <!-- TITLE -->
+  <div class="form-group">
+    <label for="client-title">Title</label><br>
+    <input class="form-control" id="client-title" type="text" name="title" value="{{client.title}}"/>
+  </div>
+
+
+  <!-- DESCRIPTION -->
+  <div class="form-group">
+    <label for="client-description">Description</label><br>
+    <textarea class="form-control" id="client-description" name="description" rows="10" />{{client.description}}</textarea>
+  </div>
+</fieldset>
